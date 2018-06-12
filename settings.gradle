@@ -1,0 +1,5 @@
+
+rootProject.name = "${group}-push"
+include ":${group}-push-shared"
+include ":${group}-push-core"
+include ":${group}-push-autoconfig"
