@@ -1,5 +1,5 @@
 
-rootProject.name = "${group}-push"
-include ":${group}-push-shared"
-include ":${group}-push-core"
-include ":${group}-push-autoconfig"
+rootProject.name = "xz-push"
+include ":${rootProject.name}-shared"
+include ":${rootProject.name}-core"
+include ":${rootProject.name}-autoconfig"
