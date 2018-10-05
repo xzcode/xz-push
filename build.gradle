@@ -7,12 +7,15 @@ subprojects {
 	group = "${group}"
 	version = "${version}"
 	
+	def profile = System.getProperty("profile")
+	
 	repositories {
-
-		maven {url 'test'.equals(System.getProperty("profile")) ? "${testNexusPublicUrl}" : "${nexusPublicUrl}"}
+		if('test'.equals(profile)){
+			maven {url "${testNexusPublicUrl}"}		
+		}else {
+			maven {url "${nexusPublicUrl}"}	
+		}
 		mavenLocal()
-		mavenCentral()
-		jcenter()
 	}
 	
 	dependencies {
@@ -41,11 +44,21 @@ subprojects {
 	        }
 	    }
 	    repositories {
-	        maven {
-	            url "${nexusReleaseUrl}"
-	            credentials {
-		            username = nexusUsername
-		            password = nexusPassword
+	        if('test'.equals(profile)){
+	        	maven {
+		            url version.endsWith('SNAPSHOT') ? "${testNexusSnapshotsUrl}" : "${testNexusReleaseUrl}"
+		            credentials {
+			            username = System.getProperty("nexusUsername")
+			            password = System.getProperty("nexusPassword")
+			        }
+		        }
+	        }else {
+		        maven {
+		            url version.endsWith('SNAPSHOT') ? "${nexusSnapshotsUrl}" : "${nexusReleaseUrl}"
+		            credentials {
+			            username = nexusUsername
+			            password = nexusPassword
+			        }
 		        }
 	        }
 	    }
