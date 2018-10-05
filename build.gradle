@@ -9,8 +9,7 @@ subprojects {
 	
 	repositories {
 
-		maven {url "${nexusPublicUrl}"}
-		maven {url "${nexusSnapshotsUrl}"}
+		maven {url 'test'.equals(System.getProperty("profile")) ? "${testNexusPublicUrl}" : "${nexusPublicUrl}"}
 		mavenLocal()
 		mavenCentral()
 		jcenter()
