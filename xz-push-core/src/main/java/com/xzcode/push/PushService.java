@@ -1,4 +1,4 @@
-package com.sourcemuch.commons.push.core.impl;
+package com.xzcode.push;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,16 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
-import com.sourcemuch.commons.push.core.IPushService;
-import com.sourcemuch.commons.push.core.config.PushConfig;
-import com.sourcemuch.commons.push.shared.constant.CommonPushConstant;
-import com.sourcemuch.commons.push.shared.exception.BizException;
-import com.sourcemuch.commons.push.shared.model.PushInfo;
-import com.sourcemuch.commons.push.shared.model.PushTargetInfo;
 import com.xiaomi.xmpush.server.Constants;
 import com.xiaomi.xmpush.server.Message;
 import com.xiaomi.xmpush.server.Message.Builder;
 import com.xiaomi.xmpush.server.Message.IOSBuilder;
+import com.xzcode.push.core.config.PushConfig;
+import com.xzcode.push.core.constant.PushConstant;
+import com.xzcode.push.core.exception.PushException;
+import com.xzcode.push.core.model.PushInfo;
+import com.xzcode.push.core.model.PushTargetInfo;
 import com.xiaomi.xmpush.server.Result;
 import com.xiaomi.xmpush.server.Sender;
 import com.xiaomi.xmpush.server.TargetedMessage;
@@ -42,22 +41,26 @@ public class PushService implements IPushService {
 	
 	
 	/**
+	 * 发送相同的消息给所有用户
+	 * @param appkey
+	 * @param packages
+	 * @param retries
 	 * @param pushInfo
 	 * @param regids
 	 * @throws Exception
 	 * @author zai
-	 * 2017-03-27 11:28:03
+	 * 2017-03-27 10:42:50
 	 */
 	@Override
 	public void sendCommonMessage(PushInfo pushInfo) throws Exception {
 	    //Constants.useOfficial();
 		
 		if(pushInfo.getAndroidTargets().isEmpty() && pushInfo.getIosTargets().isEmpty()){
-			BizException.throwz("推送目标不能为空!");
+			PushException.throwz("推送目标不能为空!");
 		}
 		
 		if(pushInfo.getAndroidTargets().size() + pushInfo.getAndroidTargets().size() > 1000){
-			BizException.throwz("每次推送目标数量不能大于1000!");
+			PushException.throwz("每次推送目标数量不能大于1000!");
 		}
 		
 		
@@ -106,25 +109,26 @@ public class PushService implements IPushService {
 	}
 	
 	/**
-	 * 对同一个客户端推送多条
-	 * @param pushInfos
+	 * 发送多条消息给一个用户
+	 * @param pushInfo
 	 * @throws Exception
+	 * 
 	 * @author zai
-	 * 2017-03-27 11:28:03
+	 * 2017-06-21
 	 */
 	@Override
 	public void sendTargetedMessage(PushTargetInfo pushInfo) throws Exception {
 		
 		if(pushInfo == null) {
-			BizException.throwz("推送集合不能为空!");
+			PushException.throwz("推送集合不能为空!");
 		}
 		
 		if(pushInfo.getTitles().size() > 1000) {
-			BizException.throwz("推送目标数量不能大于1000!");
+			PushException.throwz("推送目标数量不能大于1000!");
 		}
 		
 		if (pushInfo.getDeviceType() == null) {
-	    	BizException.throwz("推送目标的DeviceType不能为空!");
+	    	PushException.throwz("推送目标的DeviceType不能为空!");
 		}
 	    
 	    
@@ -134,7 +138,7 @@ public class PushService implements IPushService {
 	    Message message = null;
 	    for (int i = 0; i < messages.size(); i++) {
 	    	
-	    	if (CommonPushConstant.DeviceTypeConstant.MOBILE_ANDROID.equals(pushInfo.getDeviceType())) {
+	    	if (PushConstant.DeviceTypeConstant.MOBILE_ANDROID.equals(pushInfo.getDeviceType())) {
 	    		
 	    		message = buildAndroidMessage(
 	    				pushInfo.getTitles().get(i),
@@ -143,7 +147,7 @@ public class PushService implements IPushService {
 	    				pushInfo.getMessageTypes().get(i),
 						pushInfo.getDatas().get(i)
 		    			);
-			}else if (CommonPushConstant.DeviceTypeConstant.MOBILE_IOS.equals(pushInfo.getDeviceType())){
+			}else if (PushConstant.DeviceTypeConstant.MOBILE_IOS.equals(pushInfo.getDeviceType())){
 				message = buildIosMessage(
 						pushInfo.getTitles().get(i),
 						pushInfo.getPayloads().get(i),
@@ -161,9 +165,9 @@ public class PushService implements IPushService {
 	    	messages.add(targetedMessage);
 		}
 	    Sender sender = null;
-	    if (CommonPushConstant.DeviceTypeConstant.MOBILE_ANDROID.equals(pushInfo.getDeviceType())) {
+	    if (PushConstant.DeviceTypeConstant.MOBILE_ANDROID.equals(pushInfo.getDeviceType())) {
 	    	sender = new Sender(pushconfig.getAndroid_appsecret());
-	    }else if (CommonPushConstant.DeviceTypeConstant.MOBILE_IOS.equals(pushInfo.getDeviceType())){
+	    }else if (PushConstant.DeviceTypeConstant.MOBILE_IOS.equals(pushInfo.getDeviceType())){
 	    	sender = new Sender(pushconfig.getIos_appsecret());
 	    }
 	    

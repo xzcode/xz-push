@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.sourcemuch.commons.push.shared.constant.CommonPushConstant;
+import com.sourcemuch.commons.push.shared.constant.PushConstant;
 
 /**
  * 消息推送对象
@@ -53,9 +53,9 @@ public class PushInfo {
 	}
 	
 	public PushInfo addTarget(String target, String deviceType) {
-		if (CommonPushConstant.DeviceTypeConstant.MOBILE_ANDROID.equals(deviceType)) {
+		if (PushConstant.DeviceTypeConstant.MOBILE_ANDROID.equals(deviceType)) {
 			this.androidTargets.add(target);
-		}else if (CommonPushConstant.DeviceTypeConstant.MOBILE_IOS.equals(deviceType)) {
+		}else if (PushConstant.DeviceTypeConstant.MOBILE_IOS.equals(deviceType)) {
 			this.iosTargets.add(target);
 		}
 		return this;

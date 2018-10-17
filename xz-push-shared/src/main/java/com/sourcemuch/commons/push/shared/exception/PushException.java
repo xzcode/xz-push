@@ -6,10 +6,10 @@ package com.sourcemuch.commons.push.shared.exception;
  * @author zai
  * 2017-03-25 03:37:27
  */
-public class BizException extends Exception {
+public class PushException extends RuntimeException {
 	private static final long serialVersionUID = -1715907038757557299L;
 
-	public BizException(String message) {
+	public PushException(String message) {
 		super(message);
 	}
 	
@@ -24,8 +24,8 @@ public class BizException extends Exception {
 		return this;
 	}
 	
-	public static BizException throwz(String message) {
-		return new BizException(message);
+	public static PushException throwz(String message) {
+		return new PushException(message);
 	}
 	
 	

@@ -1,4 +1,4 @@
-package com.sourcemuch.commons.push.core.config;
+package com.xzcode.push.core.config;
 
 public class PushConfig {
 	

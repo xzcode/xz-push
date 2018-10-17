@@ -1,4 +1,4 @@
-package com.sourcemuch.commons.push.autoconfig;
+package com.xzcode.push.autoconfig;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -6,13 +6,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.sourcemuch.commons.push.core.IPushService;
-import com.sourcemuch.commons.push.core.config.PushConfig;
-import com.sourcemuch.commons.push.core.impl.PushService;
+import com.xzcode.push.IPushService;
+import com.xzcode.push.PushService;
+import com.xzcode.push.core.config.PushConfig;
 
 
 @Configuration
-@ConditionalOnProperty(prefix = "sourcemuch.commons.push", name="enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "xz.push", name="enabled", havingValue = "true")
 @ConditionalOnMissingBean({IPushService.class})
 public class PushAutoConfig {
 	
@@ -25,7 +25,7 @@ public class PushAutoConfig {
 	}
 	
 	@Bean
-	@ConfigurationProperties(prefix = "sourcemuch.commons.push")
+	@ConfigurationProperties(prefix = "xz.push")
 	public PushConfig pushConfig() {
 		return new PushConfig();
 	}

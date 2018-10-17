@@ -1,8 +1,8 @@
-package com.sourcemuch.commons.push.core;
+package com.xzcode.push;
 
-import com.sourcemuch.commons.push.core.config.PushConfig;
-import com.sourcemuch.commons.push.shared.model.PushInfo;
-import com.sourcemuch.commons.push.shared.model.PushTargetInfo;
+import com.xzcode.push.core.config.PushConfig;
+import com.xzcode.push.core.model.PushInfo;
+import com.xzcode.push.core.model.PushTargetInfo;
 
 public interface IPushService {
 
