@@ -1,4 +1,4 @@
-package com.sourcemuch.commons.push.shared.model;
+package com.xzcode.push.core.model;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

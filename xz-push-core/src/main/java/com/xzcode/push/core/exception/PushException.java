@@ -1,4 +1,4 @@
-package com.sourcemuch.commons.push.shared.exception;
+package com.xzcode.push.core.exception;
 
 /**
  * 通用业务异常

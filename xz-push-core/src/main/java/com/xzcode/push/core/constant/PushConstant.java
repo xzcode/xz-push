@@ -1,4 +1,4 @@
-package com.sourcemuch.commons.push.shared.constant;
+package com.xzcode.push.core.constant;
 
 public class PushConstant {
 	
