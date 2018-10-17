@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.sourcemuch.commons.push.autoconfig.PushAutoConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.xzcode.push.autoconfig.PushAutoConfig
