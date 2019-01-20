@@ -10,6 +10,8 @@ public class PushConfig {
 	
 	private Integer retries;
 	
+	private long ttl = 7 * 24 * 3600l;
+	
 	private String env;
 	
 	private boolean enabled;
@@ -60,6 +62,14 @@ public class PushConfig {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public long getTtl() {
+		return ttl;
+	}
+
+	public void setTtl(long ttl) {
+		this.ttl = ttl;
 	}
 	
 	

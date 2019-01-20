@@ -203,6 +203,8 @@ public class PushService implements IPushService {
 			 		for (String key : data.keySet()) {
 			 			builder.extra(key, data.get(key));
 			 		}
+			 		
+			 		builder.timeToLive(pushconfig.getTtl());
 		        
 	                
 	                //.passThrough(1)  //消息使用透传方式
@@ -228,7 +230,7 @@ public class PushService implements IPushService {
         for (String key : data.keySet()) {
 			iosBuilder.extra(key, data.get(key));
 		}
-        
+        iosBuilder.timeToLive(pushconfig.getTtl());
 		return iosBuilder.build();
         
         

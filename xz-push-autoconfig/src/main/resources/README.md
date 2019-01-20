@@ -11,5 +11,6 @@ xz:
 	    android_appsecret: T6cNW9/sPWaE4Ac1pKMt5A==
 	    packages: xiaomi-package
 	    retries: 5
+	    #ttl: 5
 	    env: test
 ```
